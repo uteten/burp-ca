@@ -1,5 +1,5 @@
 # burp用のCA認証局作成手順
-====
+
 環境：CentOS7
 
 1. 鍵作成  
@@ -29,9 +29,7 @@
     「Proxy Listeners」の「Import / export CA certificate」ボタンを押下し、Import>Certificate and private key from PKCS#12 keystore1  
 
 
-====
 # AndroidのプリインストールされたCA認証局に俺俺CAを追加する手順  
-====
 
 AndroiのCA認証局は以下のディレクトリにおいてある  
 `/system/etc/security/cacerts`  
