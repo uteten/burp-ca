@@ -1,5 +1,6 @@
 # burp用のCA認証局作成手順
 ====
+
 # 環境
 CentOS7
 
@@ -29,4 +30,33 @@ CentOS7
     メニューからProxy->Options  
     「Proxy Listeners」の「Import / export CA certificate」ボタンを押下し、Import>Certificate and private key from PKCS#12 keystore1  
 
+
+====
+# AndroidのプリインストールされたCA認証局に俺俺CAを追加する手順  
+====
+
+AndroiのCA認証局は以下のディレクトリにおいてある  
+`/system/etc/security/cacerts`  
+Rootを取っていればここにCAを追加すれば良い。ファイル名はsubject_hash_old以外は無視される。
+
+
+1. Android用のCA認証局ファイルを作成  
+    `openssl x509 -noout -subject_hash_old -in cacert.pem -inform pem`  
+    66326da7  
+    ここで表示される8桁のHASHに.0を追加した文字列をファイル名にする  
+    `copy cacert.pem 66326da7.0`  
+    `openssl x509 -inform PEM -text -noout -in 66326da7.0 >> 66326da7.0`
+
+2. Androidに配置  
+    上で作った66326da7.0をSDカードなどに入れてAndroidに接続しadbでファイルを配置  
+    `> adb shell`  
+    `$ su`  
+    `# cd /system/etc/security/cacerts`  
+    `# mount -o rw,remount /system`  
+    `# cp  /mnt/media_rw/****/66326da7.0 .`  
+    `# chmod 644 66326da7.0`  
+
+3.Android端末で確認
+    設定＞詳細背RT邸＞セキュリティ＞信頼できる認証情報  
+    システムのタブに追加したCAがあればOK。配置したファイル名が異なると見えていても無視されるので注意
     
