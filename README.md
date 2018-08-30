@@ -33,10 +33,10 @@
 
 AndroiのCA認証局は以下のディレクトリにおいてある  
 `/system/etc/security/cacerts`  
-Rootを取っていればここにCAを追加すれば良い。ファイル名はsubject_hash_old以外は無視される。
+Rootを取っていればここにCAを追加すれば良い。
 
 
-1. Android用のCA認証局ファイルを作成  
+1. Android用のCA認証局ファイルを作成(ファイル名に意味があるので注意）  
     `openssl x509 -noout -subject_hash_old -in cacert.pem -inform pem`  
     66326da7  
     ここで表示される8桁のHASHに.0を追加した文字列をファイル名にする  
