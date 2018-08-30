@@ -25,7 +25,7 @@ CentOS7
 3. PFX作成(Burpインポート用)
     `openssl pkcs12 -export -in cacert.pem -inkey private.pem -out ca.pfx`
 
-4.ca.pfxをBurpにインストール
+4. ca.pfxをBurpにインストール
     メニューからProxy->Options
     「Proxy Listeners」の「Import / export CA certificate」ボタンを押下し、Import>Certificate and private key from PKCS#12 keystore1
 
